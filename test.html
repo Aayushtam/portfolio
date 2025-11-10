@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aayush Tamrakar - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                radial-gradient(circle, rgba(79, 172, 254, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #aaa;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .typing-effect {
+            border-right: 2px solid #667eea;
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #667eea; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Floating Icons */
+        .social-icons {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 100;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scale(1.1);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .skill-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            animation: fillBar 1.5s ease forwards;
+            transform-origin: left;
+        }
+
+        @keyframes fillBar {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .contact-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-item span {
+            font-size: 1.5rem;
+        }
+
+        /* Updated Contact Section Styles */
+        .contact-container p {
+            color: #aaa;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: grayscale(0);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .contact-card p {
+            color: #aaa;
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .contact-card:hover p {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .social-icons {
+                position: static;
+                flex-direction: row;
+                justify-content: center;
+                transform: none;
+                margin: 2rem 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Contact Form Styles */
+        .contact-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info-section {
+            margin-bottom: 4rem;
+        }
+
+        .contact-form-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #aaa;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Responsive adjustments for contact section */
+        @media (max-width: 768px) {
+            .contact-form-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: #667eea;
+        }
+		
+		/* Chat Assistant - Floating Button */
+		.chat-toggle {
+			position: fixed;
+			right: 24px;
+			bottom: 24px;
+			z-index: 1000;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: #fff;
+			border: none;
+			border-radius: 999px;
+			padding: 0.9rem 1.2rem;
+			font-weight: 600;
+			box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+			cursor: pointer;
+			transition: transform 0.15s ease, box-shadow 0.2s ease;
+		}
+		.chat-toggle:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+		}
+		
+		/* Chat Assistant - Panel */
+		.chat-widget {
+			position: fixed;
+			right: 24px;
+			bottom: 84px;
+			width: 340px;
+			max-height: 60vh;
+			display: flex;
+			flex-direction: column;
+			background: #111827;
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 16px;
+			box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+			overflow: hidden;
+			z-index: 1000;
+		}
+		.chat-widget.hidden { display: none; }
+		
+		.chat-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.8rem 1rem;
+			background: #0f172a;
+			border-bottom: 1px solid rgba(255,255,255,0.08);
+		}
+		.chat-header-title {
+			font-size: 0.95rem;
+			font-weight: 600;
+			color: #e5e7eb;
+		}
+		.chat-close {
+			background: transparent;
+			border: none;
+			color: #9ca3af;
+			cursor: pointer;
+			font-size: 1.1rem;
+		}
+		
+		.chat-messages {
+			padding: 0.9rem;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+			gap: 0.6rem;
+			scroll-behavior: smooth;
+		}
+		.message {
+			max-width: 85%;
+			padding: 0.6rem 0.8rem;
+			border-radius: 12px;
+			line-height: 1.35;
+			font-size: 0.92rem;
+			white-space: pre-wrap;
+			word-break: break-word;
+		}
+		.message.user {
+			align-self: flex-end;
+			background: #334155;
+			color: #e5e7eb;
+			border-top-right-radius: 4px;
+		}
+		.message.bot {
+			align-self: flex-start;
+			background: #1f2937;
+			color: #f3f4f6;
+			border-top-left-radius: 4px;
+		}
+		
+		.chat-input {
+			padding: 0.8rem;
+			display: flex;
+			gap: 0.6rem;
+			background: #0b1220;
+			border-top: 1px solid rgba(255,255,255,0.08);
+		}
+		.chat-input input {
+			flex: 1;
+			background: #0f172a;
+			border: 1px solid rgba(255,255,255,0.08);
+			color: #e5e7eb;
+			border-radius: 10px;
+			padding: 0.6rem 0.8rem;
+			outline: none;
+		}
+		.chat-input button {
+			background: #667eea;
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			padding: 0.6rem 0.9rem;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		
+		@media (max-width: 480px) {
+			.chat-widget {
+				right: 12px;
+				left: 12px;
+				width: auto;
+			}
+			.chat-toggle { right: 12px; bottom: 12px; }
+		}
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">Portfolio</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+        <a href="https://github.com/Aayushtam?tab=repositories" title="GitHub"><img src="https://1000logos.net/wp-content/uploads/2021/05/GitHub-logo.png" alt="GitHub" style="height: 24px; width: auto; vertical-align: middle;"></a>
+        <a href="https://www.linkedin.com/in/aayush-tamrakar-56889920b/" title="LinkedIn"><img src="/Users/developer/Desktop/personal_portfolio/sources/LI-In-Bug.png" alt="LinkedIn" style="height: 24px; width: auto; vertical-align: middle;"></a>
+        <a href="mailto:ayush.t.2010@gmail.com" title="Email"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email" style="height: 24px; width: auto; vertical-align: middle;"></a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Aayush Tamrakar</h1>
+            <p class="subtitle">
+                I'm a <span class="typing-effect">AIML Engineer</span>
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="/Users/developer/Desktop/personal_portfolio/sources/20250909_154338.jpg" alt="Your Photo">
+            </div>
+            <div class="about-text">
+                <p>
+                    👋 Hello! I'm Aayush Tamrakar, an AI & Data Science enthusiast from Indore, India, passionate about transforming data into intelligent, actionable solutions.
+                </p>
+                <p>
+                    💡 With a strong foundation in Machine Learning, Predictive Modeling, and Data Analytics, I specialize in building systems that learn, adapt, and optimize decision-making. 
+                    My work blends data-driven insights with cutting-edge AI technologies to create scalable, real-world solutions.
+                </p>
+                <p>
+                    🚀 I have hands-on experience with tools and frameworks like Python, LangChain, Power BI, SQL, and Deep Learning, 
+                    and I enjoy working on projects ranging from speech-to-speech AI assistants to retrieval-augmented generation systems.
+                </p>
+                <p>
+                    📊 I’m driven by curiosity and continuous learning—whether it’s enhancing model performance, visualizing complex datasets, or deploying end-to-end AI pipelines.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Data Science & Analytics</h3>
+                <div>
+                    <p>Python</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>SQL</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Statistical Analysis</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Predictive Modeling</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <h3>Machine Learning & AI</h3>
+                <div>
+                    <p>Machine Learning</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Deep Learning</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Natural Language Processing (NLP)</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Model Deployment</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <h3>Data Visualization & Tools</h3>
+                <div>
+                    <p>Power BI</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Tableau</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Advanced Excel</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div>
+                    <p>Data Modeling</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Floating Chat Assistant -->
+	<button id="chat-toggle" class="chat-toggle">Chat with Assistant</button>
+	<div id="chat-widget" class="chat-widget hidden" aria-live="polite">
+		<div class="chat-header">
+			<div class="chat-header-title">Personal Assistant</div>
+			<button class="chat-close" id="chat-close" aria-label="Close chat">✕</button>
+		</div>
+		<div id="chat-messages" class="chat-messages">
+			<div class="message bot">Hi! I’m your assistant. Ask me about projects, skills, or how to contact you.</div>
+		</div>
+		<form id="chat-form" class="chat-input">
+			<input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" aria-label="Chat message">
+			<button type="submit">Send</button>
+		</form>
+	</div>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🎨</div>
+                <div class="project-content">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-stack e-commerce solution with payment integration, user authentication, and real-time inventory management.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <h3>Social Media App</h3>
+                    <p>Real-time social networking application with messaging, posts, and interactive features.</p>
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Redux</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🚀</div>
+                <div class="project-content">
+                    <h3>Portfolio CMS</h3>
+                    <p>Custom content management system for managing portfolios and blog posts with admin dashboard.</p>
+                    <div class="project-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-wrapper">
+	            <!-- Contact Info Cards removed -->
+
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: #667eea;">Send Me a Message</h3>
+                <form action="https://formsubmit.co/ayush.t.2010@gmail.com" method="POST" class="contact-form">
+                    <!-- Hidden Fields for FormSubmit Configuration -->
+                    <input type="hidden" name="_subject" value="New Contact from Portfolio Website!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Your Full Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reason">Reason to Connect *</label>
+                        <select id="reason" name="reason" required>
+                            <option value="">Select a reason</option>
+                            <option value="Job Opportunity">Job Opportunity</option>
+                            <option value="Collaboration">Collaboration</option>
+                            <option value="Freelance Project">Freelance Project</option>
+                            <option value="Question/Inquiry">Question/Inquiry</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell me more about your project or inquiry..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Send Message 🚀
+                    </button>
+                </form>
+            </div>
+
+            <!-- Download Resume Button -->
+            <div style="margin-top: 3rem; text-align: center;">
+                <a href="/Users/developer/Desktop/personal_portfolio/sources/AayushTamrakarResume.pdf" class="btn btn-secondary" download>
+                    Download Resume 📄
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Typing effect
+        const texts = ['AIML Engineer', 'Data Scientist', 'Problem Solver', 'Creative Thinker'];
+        let count = 0;
+        let index = 0;
+        let currentText = '';
+        let letter = '';
+
+        function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+
+            document.querySelector('.typing-effect').textContent = letter;
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000);
+            } else {
+                setTimeout(type, 100);
+            }
+        }
+
+        type();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+		
+		// Chat Assistant logic
+		const chatToggle = document.getElementById('chat-toggle');
+		const chatWidget = document.getElementById('chat-widget');
+		const chatClose = document.getElementById('chat-close');
+		const chatForm = document.getElementById('chat-form');
+		const chatInput = document.getElementById('chat-input');
+		const chatMessages = document.getElementById('chat-messages');
+		
+		function appendMessage(text, role) {
+			const div = document.createElement('div');
+			div.className = `message ${role}`;
+			div.textContent = text;
+			chatMessages.appendChild(div);
+			chatMessages.scrollTop = chatMessages.scrollHeight;
+		}
+		
+		function assistantReply(userText) {
+			const text = userText.toLowerCase();
+			if (text.includes('hello') || text.includes('hi')) {
+				return 'Hello! How can I help you today?';
+			}
+			if (text.includes('project') || text.includes('work')) {
+				return 'You can explore projects in the Projects section. Want me to scroll there? Type: go to projects';
+			}
+			if (text.includes('skill')) {
+				return 'Core skills include AIML, Data Science, and problem solving. Type: go to skills';
+			}
+			if (text.includes('contact') || text.includes('email')) {
+				return 'Use the contact form below on this page. I can scroll there—type: go to contact';
+			}
+			if (text.includes('go to projects')) {
+				document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				return 'Navigating to Projects…';
+			}
+			if (text.includes('go to skills')) {
+				document.querySelector('#skills')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				return 'Taking you to Skills…';
+			}
+			if (text.includes('go to contact')) {
+				document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				return 'Opening Contact section…';
+			}
+			return 'I\'m here to help! Ask about projects, skills, or say "go to contact".';
+		}
+		
+		function toggleChat(show) {
+			const shouldShow = typeof show === 'boolean' ? show : chatWidget.classList.contains('hidden');
+			if (shouldShow) {
+				chatWidget.classList.remove('hidden');
+				chatInput.focus();
+			} else {
+				chatWidget.classList.add('hidden');
+			}
+		}
+		
+		chatToggle?.addEventListener('click', () => toggleChat(true));
+		chatClose?.addEventListener('click', () => toggleChat(false));
+		
+		chatForm?.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const value = chatInput.value.trim();
+			if (!value) return;
+			appendMessage(value, 'user');
+			chatInput.value = '';
+			setTimeout(() => {
+				appendMessage(assistantReply(value), 'bot');
+			}, 300);
+		});
+    </script>
+</body>
+</html>
