@@ -106,7 +106,7 @@ chatForm?.addEventListener('submit', async (e) => {
     appendMessage(value, 'user');
     chatInput.value = '';
     try {
-        const res = await fetch('http://localhost:7860/api/chat', {
+        const res = await fetch(' https://portfolio-backend-qeil.onrender.com/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: value })
